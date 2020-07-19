@@ -10,10 +10,35 @@
 # ローカルに移動
 cd $HOME
 
+# 不要ファイルの削除
+rm examples.desktop 2>/dev/null
+
+# IPアドレス固定
+echo -e "# interfaces(5) file used by ifup(8) and ifdown(8)\nauto enp3s0
+auto enp3s0
+iface enp3s0 inet static
+    address 192.168.3.65
+    netmask 255.255.255.0
+    gateway 192.168.0.1
+    dns-nameservers 192.168.0.1" > /etc/network/interfaces
+
+# OpenSSH
+sudo apt -y install openssh-server
+sudo sed -i "s/LoginGraceTime 120/LoginGraceTime 30/" /etc/ssh/sshd_config
+sudo sed -i "s/IgnoreRhosts no/IgnoreRhosts yes/" /etc/ssh/sshd_config
+sudo sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
+sudo sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/" /etc/ssh/sshd_config
+
+# Git
+sudo apt -y install git
+
 # Anaconda
 wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 bash https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 rm https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
+
+# Pip(Python3)
+sudo apt -y install python3-pip
 
 # 古いドライバーの削除
 sudo apt -y remove nvidia-*
@@ -32,8 +57,8 @@ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 sudo apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
-sudo apt-get update
-sudo apt-get -y install cuda
+sudo apt -y update
+sudo apt-get install cuda-toolkit-11-0
 rm cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 
 # cuDNN
