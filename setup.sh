@@ -66,6 +66,9 @@ sudo dpkg -i cuDNN8.0.1/libcudnn8_8.0.1.13-1+cuda11.0_amd64.deb
 sudo dpkg -i cuDNN8.0.1/libcudnn8-dev_8.0.1.13-1+cuda11.0_amd64.deb
 sudo dpkg -i cuDNN8.0.1/libcudnn8-doc_8.0.1.13-1+cuda11.0_amd64.deb
 
+# 起動画面変更
+sudo cp lab/01-mad /etc/update-motd.d/
+
 # 不要ファイルの削除
 sudo apt list --upgradable
 sudo apt -y autoremove
