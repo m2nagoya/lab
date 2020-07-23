@@ -20,7 +20,7 @@ iface enp3s0 inet static
     address 192.168.3.65
     netmask 255.255.255.0
     gateway 192.168.0.1
-    dns-nameservers 192.168.0.1" > /etc/network/interfaces
+    dns-nameservers 8.8.8.8" > /etc/network/interfaces
 
 # OpenSSH
 sudo apt -y install openssh-server
