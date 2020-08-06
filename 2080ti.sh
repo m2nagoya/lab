@@ -49,8 +49,8 @@ wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/c
 sudo dpkg -i cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 sudo apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
 sudo apt -y update
-sudo apt-get install cuda-toolkit-11-0
-rm cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
+sudo apt -y install cuda-toolkit-11-0
+rm -r cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 
 # cuDNN
 sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda11.0_amd64.deb
