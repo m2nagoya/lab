@@ -4,7 +4,7 @@
 # Ubuntu 18.04
 # GTX 2080Ti
 # CUDA 11.0
-# cuDNN 8.0.1
+# cuDNN 8.0.2
 ################################################
 
 # 不要ファイルの削除
@@ -53,9 +53,9 @@ sudo apt-get install cuda-toolkit-11-0
 rm cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 
 # cuDNN
-sudo dpkg -i cuDNN8.0.1/libcudnn8_8.0.1.13-1+cuda11.0_amd64.deb
-sudo dpkg -i cuDNN8.0.1/libcudnn8-dev_8.0.1.13-1+cuda11.0_amd64.deb
-sudo dpkg -i cuDNN8.0.1/libcudnn8-doc_8.0.1.13-1+cuda11.0_amd64.deb
+sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda11.0_amd64.deb
+sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda11.0_amd64.deb
+sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda11.0_amd64.deb
 
 # 起動画面変更
 sudo cp lab/01-mad /etc/update-motd.d/
