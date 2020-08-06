@@ -7,32 +7,29 @@
 # cuDNN 8.0.1
 ################################################
 
-# ローカルに移動
-cd $HOME
-
 # 不要ファイルの削除
-rm examples.desktop 2>/dev/null
+# rm examples.desktop 2>/dev/null
 
 # ユーザーの追加
-sudo adduser dl_user
+# sudo adduser dl_user
 
 # OpenSSH
-sudo apt -y install openssh-server
-sudo sed -i "s/LoginGraceTime 120/LoginGraceTime 30/" /etc/ssh/sshd_config
-sudo sed -i "s/IgnoreRhosts no/IgnoreRhosts yes/" /etc/ssh/sshd_config
-sudo sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
-sudo sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/" /etc/ssh/sshd_config
+# sudo apt -y install openssh-server
+# sudo sed -i "s/LoginGraceTime 120/LoginGraceTime 30/" /etc/ssh/sshd_config
+# sudo sed -i "s/IgnoreRhosts no/IgnoreRhosts yes/" /etc/ssh/sshd_config
+# sudo sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
+# sudo sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/" /etc/ssh/sshd_config
 
 # Git
-sudo apt -y install git
+# sudo apt -y install git
 
 # Anaconda
-wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
-bash https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
-rm https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
+# wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
+# bash https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
+# rm https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 
 # Pip(Python3)
-sudo apt -y install python3-pip
+# sudo apt -y install python3-pip
 
 # 古いドライバーの削除
 sudo apt -y remove nvidia-*
@@ -61,7 +58,7 @@ sudo dpkg -i cuDNN8.0.1/libcudnn8-dev_8.0.1.13-1+cuda11.0_amd64.deb
 sudo dpkg -i cuDNN8.0.1/libcudnn8-doc_8.0.1.13-1+cuda11.0_amd64.deb
 
 # 起動画面変更
-sudo cp lab/01-mad /etc/update-motd.d/
+# sudo cp lab/01-mad /etc/update-motd.d/
 
 # 不要ファイルの削除
 sudo apt list --upgradable
