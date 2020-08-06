@@ -40,7 +40,6 @@ sudo apt -y autoremove
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
 sudo apt -y update
 sudo ubuntu-drivers autoinstall
-sudo apt -y install nvidia-cuda-toolkit
 
 # CUDA
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
@@ -49,7 +48,7 @@ wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/c
 sudo dpkg -i cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 sudo apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
 sudo apt -y update
-sudo apt -y install cuda-toolkit-11-0
+sudo apt -y install cuda
 rm -r cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
 
 # cuDNN
