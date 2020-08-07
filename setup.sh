@@ -132,3 +132,5 @@ function CUDA {
     sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda11.0_amd64.deb
   fi
 }
+
+MAIN_SELECT 1 ; COMMAND
