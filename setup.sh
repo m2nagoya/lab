@@ -22,7 +22,7 @@ COMMAND () {
       "2" ) ANACONDA      ;;
       "3" ) PIP3          ;;
       "4" ) DRIVER        ;;
-      "5" ) MAIN_SELECT 2 ;;
+      "5" ) MAIN_MENU 2 ;;
     esac
   fi
 done
