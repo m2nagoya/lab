@@ -117,6 +117,7 @@ function DRIVER {
 # CUDA
 function CUDA {
   if [ "$1" == "10.2" ]; then
+    echo "準備中"
   elif [ "$1" == "11.0" ]; then
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
     sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
