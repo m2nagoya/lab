@@ -15,7 +15,8 @@ option2[1]="11.0"
 COMMAND () {
   for n in ${!option1[@]} ; do
     if [[ ${choices1[$n]} ]]; then
-      SETUP() ; case "$n" in
+      SETUP()
+      case "$n" in
       "0" ) OPENSSH  ;;
       "1" ) GITHUB   ;;
       "2" ) ANACONDA ;;
@@ -27,7 +28,8 @@ COMMAND () {
 done
 for n in ${!option2[@]} ; do
   if [[ ${choices2[$n]} ]]; then
-    SETUP() ; case "$n" in
+    SETUP()
+    case "$n" in
     "0" ) CUDA ${option2[$n]} ;;
     "1" ) CUDA ${option2[$n]} ;;
   esac
