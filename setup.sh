@@ -17,12 +17,12 @@ COMMAND () {
     if [[ ${choices1[$n]} ]]; then
       SETUP()
       case "$n" in
-      "0" ) OPENSSH()  ;;
-      "1" ) GITHUB()   ;;
-      "2" ) ANACONDA() ;;
-      "3" ) PIP3()     ;;
-      "4" ) DRIVER()   ;;
-      "5" ) CUDA()     ;;
+      "0" ) OPENSSH       ;;
+      "1" ) GITHUB        ;;
+      "2" ) ANACONDA      ;;
+      "3" ) PIP3          ;;
+      "4" ) DRIVER        ;;
+      "5" ) MAIN_SELECT 2 ;;
     esac
   fi
 done
