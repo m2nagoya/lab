@@ -17,24 +17,24 @@ COMMAND () {
     if [[ ${choices1[$n]} ]]; then
       SETUP()
       case "$n" in
-      "0" ) OPENSSH       ;;
-      "1" ) GITHUB        ;;
-      "2" ) ANACONDA      ;;
-      "3" ) PIP3          ;;
-      "4" ) DRIVER        ;;
-      "5" ) MAIN_MENU 2 ;;
-    esac
-  fi
-done
-for n in ${!option2[@]} ; do
-  if [[ ${choices2[$n]} ]]; then
-    SETUP()
-    case "$n" in
-    "0" ) CUDA ${option2[$n]} ;;
-    "1" ) CUDA ${option2[$n]} ;;
-  esac
-fi
-done
+        "0" ) OPENSSH       ;;
+        "1" ) GITHUB        ;;
+        "2" ) ANACONDA      ;;
+        "3" ) PIP3          ;;
+        "4" ) DRIVER        ;;
+        "5" ) MAIN_SELECT 2 ;;
+      esac
+    fi
+  done
+  for n in ${!option2[@]} ; do
+    if [[ ${choices2[$n]} ]]; then
+      SETUP()
+      case "$n" in
+        "0" ) CUDA ${option2[$n]} ;;
+        "1" ) CUDA ${option2[$n]} ;;
+      esac
+    fi
+  done
 }
 
 function MAIN_SELECT {
