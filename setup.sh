@@ -56,8 +56,20 @@ function DRIVER {
 
 # CUDA
 function CUDA {
+  # CUDA 10.2 & cuDNN 8.0.2 & Ubuntu 18.04
   if [ "$1" == "10.2" ]; then
-    echo "準備中"
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+    sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+    sudo apt-get update
+    sudo apt-get -y install cuda
+    rm cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+    sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda10.2_amd64.deb
+    sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda10.2_amd64.deb
+    sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda10.2_amd64.deb
+  # CUDA 11.0 & cuDNN 8.0.2 & Ubuntu 18.04
   elif [ "$1" == "11.0" ]; then
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
     sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
