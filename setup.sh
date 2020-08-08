@@ -4,9 +4,8 @@
 option1[0]="OpenSSH"
 option1[1]="Anaconda"
 option1[2]="Git"
-option1[3]="pip3"
-option1[4]="Nvidia Driver"
-option1[5]="CUDA"
+option1[3]="Pip(Python3)"
+option1[4]="CUDA"
 
 # CUDAバージョン
 option2[0]="10.1"
@@ -14,6 +13,7 @@ option2[1]="10.2"
 option2[2]="11.0"
 
 function SETUP {
+  sudo apt -y update
   sudo apt -y upgrade
   sudo apt -y autoremove
   sudo apt -y clean
@@ -45,56 +45,49 @@ function PIP3 {
   sudo apt -y install python3-pip
 }
 
-# NVIDIA Driver
-function DRIVER {
-  sudo apt -y remove nvidia-*
-  sudo apt -y remove cuda-*
-  sudo apt -y autoremove
-  sudo add-apt-repository -y ppa:graphics-drivers/ppa
-  sudo apt -y update
-  sudo ubuntu-drivers autoinstall
-}
-
 # CUDA
 function CUDA {
-  # CUDA 10.2 & cuDNN 8.0.2 & Ubuntu 18.04
-  if [ "$1" == "10.1" ]; then
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
-    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
-    sudo apt-key add /var/cuda-repo-10-1-local-10.1.243-418.87.00/7fa2af80.pub
-    sudo apt-get update
-    sudo apt-get -y install cuda
-    rm cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda10.1_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda10.1_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda10.1_amd64.deb
-  elif [ "$1" == "10.2" ]; then
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
-    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
-    sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
-    sudo apt-get update
-    sudo apt-get -y install cuda
-    rm cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda10.2_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda10.2_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda10.2_amd64.deb
-  # CUDA 11.0 & cuDNN 8.0.2 & Ubuntu 18.04
-  elif [ "$1" == "11.0" ]; then
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
-    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
-    sudo apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
+  if [ $# -gt 0 ] ; then
+    sudo apt -y remove nvidia-*
+    sudo apt -y remove cuda-*
+    sudo apt -y autoremove
+    sudo add-apt-repository -y ppa:graphics-drivers/ppa
     sudo apt -y update
-    sudo apt -y install cuda
-    rm -r cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda11.0_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda11.0_amd64.deb
-    sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda11.0_amd64.deb
+    sudo ubuntu-drivers autoinstall
+    # CUDA 10.1 & cuDNN 8.0.2 & Ubuntu 18.04
+    if [ "$1" == "10.1" ]; then
+      wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+      sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+      wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+      sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+      sudo apt-key add /var/cuda-repo-10-1-local-10.1.243-418.87.00/7fa2af80.pub
+      sudo apt-get update
+      sudo apt-get -y install cuda
+      rm cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+      sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda10.1_amd64.deb
+      sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda10.1_amd64.deb
+      sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda10.1_amd64.deb
+    # CUDA 10.2 & cuDNN 8.0.2 & Ubuntu 18.04
+    elif [ "$1" == "10.2" ]; then
+      wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+      sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+      wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+      sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+      sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+      sudo apt-get update
+      sudo apt-get -y install cuda
+      rm cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+      sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda10.2_amd64.deb
+      sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda10.2_amd64.deb
+      sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda10.2_amd64.deb
+      # CUDA 11.0 & cuDNN 8.0.2 & Ubuntu 18.04
+    elif [ "$1" == "11.0" ]; then
+      wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+      sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+      wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
+      sudo dpkg -i cuda-repo-ubuntu1804-11-0-local_11.0.2-450.51.05-1_amd64.deb
+      sudo apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
+    fi
   fi
 }
 
@@ -106,8 +99,7 @@ function COMMAND () {
         "1" ) GITHUB        ;;
         "2" ) ANACONDA      ;;
         "3" ) PIP3          ;;
-        "4" ) DRIVER        ;;
-        "5" ) MAIN_SELECT 2 ;;
+        "4" ) MAIN_SELECT 2 ;;
       esac
     fi
   done
@@ -157,4 +149,4 @@ function MAIN_MENU {
   done
 }
 
-SETUP 2>/dev/null ; MAIN_SELECT 1 ; COMMAND
+SETUP ; MAIN_SELECT 1 ; COMMAND ; SETUP
