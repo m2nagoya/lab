@@ -4,13 +4,14 @@
 option1[0]="OpenSSH"
 option1[1]="Anaconda"
 option1[2]="Git"
-option1[3]="Pip(Python3)"
+option1[3]="pip3"
 option1[4]="Nvidia Driver"
 option1[5]="CUDA"
 
 # CUDAバージョン
-option2[0]="10.2"
-option2[1]="11.0"
+option2[0]="10.1"
+option2[1]="10.2"
+option2[2]="11.0"
 
 function SETUP {
   sudo apt -y upgrade
@@ -57,7 +58,19 @@ function DRIVER {
 # CUDA
 function CUDA {
   # CUDA 10.2 & cuDNN 8.0.2 & Ubuntu 18.04
-  if [ "$1" == "10.2" ]; then
+  if [ "$1" == "10.1" ]; then
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+    sudo apt-key add /var/cuda-repo-10-1-local-10.1.243-418.87.00/7fa2af80.pub
+    sudo apt-get update
+    sudo apt-get -y install cuda
+    rm cuda-repo-ubuntu1804-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+    sudo dpkg -i cuDNN8.0.2/libcudnn8_8.0.2.39-1+cuda10.1_amd64.deb
+    sudo dpkg -i cuDNN8.0.2/libcudnn8-dev_8.0.2.39-1+cuda10.1_amd64.deb
+    sudo dpkg -i cuDNN8.0.2/libcudnn8-doc_8.0.2.39-1+cuda10.1_amd64.deb
+  elif [ "$1" == "10.2" ]; then
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
     sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
     wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
@@ -103,6 +116,7 @@ function COMMAND () {
       case "$n" in
         "0" ) CUDA ${option2[$n]} ;;
         "1" ) CUDA ${option2[$n]} ;;
+        "2" ) CUDA ${option2[$n]} ;;
       esac
     fi
   done
