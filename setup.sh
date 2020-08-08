@@ -76,7 +76,6 @@ function CUDA {
 function COMMAND () {
   for n in ${!option1[@]} ; do
     if [[ ${choices1[$n]} ]]; then
-      SETUP()
       case "$n" in
         "0" ) OPENSSH       ;;
         "1" ) GITHUB        ;;
@@ -89,7 +88,6 @@ function COMMAND () {
   done
   for n in ${!option2[@]} ; do
     if [[ ${choices2[$n]} ]]; then
-      SETUP()
       case "$n" in
         "0" ) CUDA ${option2[$n]} ;;
         "1" ) CUDA ${option2[$n]} ;;
@@ -133,4 +131,4 @@ function MAIN_MENU {
   done
 }
 
-MAIN_SELECT 1 ; COMMAND
+SETUP 2>/dev/null ; MAIN_SELECT 1 ; COMMAND
