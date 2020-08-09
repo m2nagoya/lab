@@ -4,8 +4,9 @@
 option1[0]="OpenSSH"
 option1[1]="Anaconda"
 option1[2]="Git"
-option1[3]="Pip(Python3)"
-option1[4]="CUDA"
+option1[3]="pip3"
+option1[4]="Nvidia-Driver"
+option1[5]="CUDA"
 
 # CUDAバージョン
 option2[0]="10.1"
@@ -43,6 +44,15 @@ function ANACONDA {
 # Pip(Python3)
 function PIP3 {
   sudo apt -y install python3-pip
+}
+
+function NDRIVER {
+  sudo apt -y remove nvidia-*
+  sudo apt -y remove cuda-*
+  sudo apt -y autoremove
+  sudo add-apt-repository -y ppa:graphics-drivers/ppa
+  sudo apt -y update
+  sudo ubuntu-drivers autoinstall
 }
 
 # CUDA
@@ -106,7 +116,8 @@ function COMMAND () {
         "1" ) GITHUB        ;;
         "2" ) ANACONDA      ;;
         "3" ) PIP3          ;;
-        "4" ) MAIN_SELECT 2 ;;
+        "4" ) NDRIVER       ;;
+        "5" ) MAIN_SELECT 2 ;;
       esac
     fi
   done
