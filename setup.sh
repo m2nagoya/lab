@@ -53,7 +53,8 @@ function CUDA {
     sudo apt -y autoremove
     sudo add-apt-repository -y ppa:graphics-drivers/ppa
     sudo apt -y update
-    sudo ubuntu-drivers autoinstall
+    # sudo ubuntu-drivers autoinstall
+    sudo apt -y install nvidia-driver-415
     # CUDA 10.1 & cuDNN 8.0.2 & Ubuntu 18.04
     if [ "$1" == "10.1" ]; then
       wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
