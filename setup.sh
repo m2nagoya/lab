@@ -2,11 +2,8 @@
 
 # メニュー
 option1[0]="OpenSSH"
-option1[1]="Anaconda"
-option1[2]="Git"
-option1[3]="pip3"
-option1[4]="Nvidia-Driver"
-option1[5]="CUDA"
+option1[1]="Nvidia-Driver"
+option1[2]="CUDA"
 
 # CUDAバージョン
 option2[0]="10.1"
@@ -27,23 +24,6 @@ function OPENSSH {
   sudo sed -i "s/IgnoreRhosts no/IgnoreRhosts yes/" /etc/ssh/sshd_config
   sudo sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
   sudo sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/" /etc/ssh/sshd_config
-}
-
-# Git
-function GITHUB {
-  sudo apt -y install git
-}
-
-# Anaconda
-function ANACONDA {
-  wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
-  bash https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
-  rm https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
-}
-
-# pip3 
-function PIP3 {
-  sudo apt -y install python3-pip
 }
 
 # Nvidia-Driver
@@ -114,11 +94,8 @@ function COMMAND () {
     if [[ ${choices1[$n]} ]]; then
       case "$n" in
         "0" ) OPENSSH       ;;
-        "1" ) GITHUB        ;;
-        "2" ) ANACONDA      ;;
-        "3" ) PIP3          ;;
-        "4" ) NDRIVER       ;;
-        "5" ) MAIN_SELECT 2 ;;
+        "1" ) NDRIVER       ;;
+        "2" ) MAIN_SELECT 2 ;;
       esac
     fi
   done
